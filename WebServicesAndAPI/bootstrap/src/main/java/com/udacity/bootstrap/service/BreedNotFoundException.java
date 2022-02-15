@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.List;
 
 //@ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "Dog not found")
-public class DogNotFoundException extends RuntimeException implements GraphQLError {
+public class BreedNotFoundException extends RuntimeException implements GraphQLError {
 
 
-    public DogNotFoundException(String message, Long id) {
+    public BreedNotFoundException(String message, String name) {
         super(message);
     }
 

@@ -1,3 +1,4 @@
+/*
 package com.udacity.bootstrap.service;
 
 import com.udacity.bootstrap.entity.Dog;
@@ -34,3 +35,4 @@ public class DogServiceImpl implements DogService {
         return dogRepository.findAllNames();
     }
 }
+*/

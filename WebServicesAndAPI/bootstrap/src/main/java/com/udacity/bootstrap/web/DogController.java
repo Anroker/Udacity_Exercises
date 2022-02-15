@@ -1,3 +1,4 @@
+/*
 package com.udacity.bootstrap.web;
 
 import com.udacity.bootstrap.entity.Dog;
@@ -45,3 +46,4 @@ public class DogController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }
+*/
