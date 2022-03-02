@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Dog/Dog.iml" filepath="$PROJECT_DIR$/Dog/Dog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MSA_Dog_SpringDataRest/Dog_SpringDataRest.iml" filepath="$PROJECT_DIR$/MSA_Dog_SpringDataRest/Dog_SpringDataRest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MSA.iml" filepath="$PROJECT_DIR$/MSA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka/eureka.iml" filepath="$PROJECT_DIR$/eureka/eureka.iml" />
+    </modules>
+  </component>
+</project>
