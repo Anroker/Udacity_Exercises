@@ -1,3 +1,4 @@
+/*
 package com.udacity.restAndGraphQL.mutuator;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
@@ -48,3 +49,4 @@ public class Mutation implements GraphQLMutationResolver {
     }
 
 }
+*/

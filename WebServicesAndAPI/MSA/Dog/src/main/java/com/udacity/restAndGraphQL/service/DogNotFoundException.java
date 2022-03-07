@@ -1,3 +1,4 @@
+/*
 package com.udacity.restAndGraphQL.service;
 
 import graphql.ErrorType;
@@ -24,3 +25,4 @@ public class DogNotFoundException extends RuntimeException implements GraphQLErr
         return ErrorType.DataFetchingException;
     }
 }
+*/
