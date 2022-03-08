@@ -1,3 +1,4 @@
+/*
 package com.udacity.restAndGraphQL.config;
 
 import org.h2.server.web.WebServlet;
@@ -15,3 +16,4 @@ public class H2Database {
         return registrationBean;
     }
 }
+*/

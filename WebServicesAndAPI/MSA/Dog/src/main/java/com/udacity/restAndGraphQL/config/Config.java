@@ -1,3 +1,4 @@
+/*
 package com.udacity.restAndGraphQL.config;
 
 import org.springframework.context.annotation.Bean;
@@ -56,3 +57,4 @@ public class Config extends WebSecurityConfigurerAdapter {
     }
 
 }
+*/
