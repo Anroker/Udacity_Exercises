@@ -1,28 +1,37 @@
-package com.example.Exercise_0.entity;
+package com.example.Exercise_Plants.entity;
 
+import com.example.Exercise_Plants.jsonViews.ViewsJSON;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "plant")
-public class Flower {
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Plant {
+
     @Id
     @GeneratedValue
     private Long id;
 
+    @JsonView(ViewsJSON.Public.class)
     @Nationalized // should use @Nationalized instead of @Type=nstring
     private String name;
-    private String color;
+
+    @JsonView(ViewsJSON.Public.class)
     @Column(precision=12, scale=4)
     private BigDecimal price; // BigDecimal is the standard Java class for currency math
+
+    @ManyToOne
+    @JoinColumn(name = "delivery_id")
+    private Delivery delivery;
 
     public Long getId() {
         return id;
     }
 
-    public Flower setId(Long id) {
+    public Plant setId(Long id) {
         this.id = id;
         return this;
     }
@@ -31,17 +40,8 @@ public class Flower {
         return name;
     }
 
-    public Flower setName(String name) {
+    public Plant setName(String name) {
         this.name = name;
-        return this;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public Flower setColor(String color) {
-        this.color = color;
         return this;
     }
 
@@ -49,10 +49,8 @@ public class Flower {
         return price;
     }
 
-    public Flower setPrice(BigDecimal price) {
+    public Plant setPrice(BigDecimal price) {
         this.price = price;
         return this;
     }
-
-    /* getters and setters*/
 }
