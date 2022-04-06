@@ -330,7 +330,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/schedule/employee/2",
+					"raw": "http://localhost:8082/schedule/customer/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -338,7 +338,7 @@
 					"port": "8082",
 					"path": [
 						"schedule",
-						"employee",
+						"customer",
 						"2"
 					]
 				}
