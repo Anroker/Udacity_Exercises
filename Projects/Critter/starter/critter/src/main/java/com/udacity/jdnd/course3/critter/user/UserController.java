@@ -6,6 +6,7 @@ import com.udacity.jdnd.course3.critter.service.CustomerService;
 import com.udacity.jdnd.course3.critter.service.EmployeeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -59,6 +60,7 @@ public class UserController {
     }
 
     @PostMapping("/customer")
+    @Transactional
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO) {
         Customer customer = new Customer(customerDTO.getId(), customerDTO.getName(), customerDTO.getPhoneNumber(), customerDTO.getNotes());
         List<Long> petIds = customerDTO.getPetIds();

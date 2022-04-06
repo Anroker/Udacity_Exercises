@@ -12,7 +12,8 @@ import java.util.Set;
 public class Schedule {
 
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "sheduleGen", sequenceName = "sheduleGenSeq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sheduleGen")
     private Long id;
 
     @ManyToMany(targetEntity = Employee.class)

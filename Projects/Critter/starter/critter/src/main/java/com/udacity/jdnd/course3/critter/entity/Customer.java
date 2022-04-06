@@ -10,7 +10,8 @@ import java.util.List;
 public class Customer {
 
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "customerGen", sequenceName = "customerGenSeq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customerGen")
     private Long id;
 
     @Nationalized

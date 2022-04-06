@@ -11,7 +11,8 @@ import java.time.LocalDate;
 public class Pet {
 
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "petGen", sequenceName = "petGenSeq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "petGen")
     private Long id;
 
     private PetType type;

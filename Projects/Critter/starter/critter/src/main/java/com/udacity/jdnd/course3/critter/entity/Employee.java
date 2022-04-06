@@ -11,7 +11,8 @@ import java.util.Set;
 
 public class Employee {
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "employeeGen", sequenceName = "employeeGenSeq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employeeGen")
     private Long id;
 
     private String name;

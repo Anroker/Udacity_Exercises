@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b7286ec1-6ec7-4a7d-ab9d-78d4bb4dcb35" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/pricing-service/src/test/java/com/udacity/pricing/PricingServiceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/pricing-service/src/test/java/com/udacity/pricing/PricingServiceApplicationTests.java" afterDir="false" />
-    </list>
+    <list default="true" id="b7286ec1-6ec7-4a7d-ab9d-78d4bb4dcb35" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="266RkFXAYH5RgDr2XITagaeFhdX" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -21,6 +22,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -31,6 +37,7 @@
       <option name="presentableId" value="Default" />
       <updated>1646742191508</updated>
       <workItem from="1646742192569" duration="6000" />
+      <workItem from="1649192299202" duration="651000" />
     </task>
     <servers />
   </component>
