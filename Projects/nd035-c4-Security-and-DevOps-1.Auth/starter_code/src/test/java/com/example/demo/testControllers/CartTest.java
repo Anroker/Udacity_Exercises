@@ -3,25 +3,25 @@ package com.example.demo.testControllers;
 import com.example.demo.controllers.CartController;
 import com.example.demo.model.persistence.Cart;
 import com.example.demo.model.persistence.Item;
-import com.example.demo.model.persistence.User;
-import com.example.demo.model.persistence.UserOrder;
 import com.example.demo.model.persistence.repositories.CartRepository;
 import com.example.demo.model.persistence.repositories.ItemRepository;
 import com.example.demo.model.persistence.repositories.UserRepository;
+import com.example.demo.model.requests.ModifyCartRequest;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.IntStream;
 
+import static com.example.demo.Utility.Util.*;
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CartTest {
@@ -36,77 +36,100 @@ public class CartTest {
     private CartRepository cartRepository;
 
     @Mock
-    private ItemRepository itemRepository;
+    private ItemRepository itemTestRepository;
 
     @Before
-    public void setup(){
+    public void setup() {
 
-        when(userRepository.findByUsername("fymo")).thenReturn(createUser());
-        when(itemRepository.findById(any())).thenReturn(Optional.of(createItem(1)));
+        when(userRepository.findByUsername("userTest")).thenReturn(createUser());
+        when(itemTestRepository.findById(any())).thenReturn(Optional.of(createItem(1)));
 
     }
 
-    public CartTest() {
+    @Test
+    public void addToCart() {
+        ModifyCartRequest request = new ModifyCartRequest();
+        request.setQuantity(3);
+        request.setItemId(1);
+        request.setUsername("userTest");
+
+        ResponseEntity<Cart> response = cartController.addTocart(request);
+        assertNotNull(response);
+        assertEquals(200, response.getStatusCodeValue());
+
+        Cart actualCart = response.getBody();
+
+        Cart generatedCart = createCart(createUser());
+
+        assertNotNull(actualCart);
+
+        Item itemTest = createItem(request.getItemId());
+        BigDecimal itemTestPrice = itemTest.getPrice();
+
+        BigDecimal expectedTotal = itemTestPrice.multiply(BigDecimal.valueOf(request.getQuantity())).add(generatedCart.getTotal());
+
+        assertEquals("userTest", actualCart.getUser().getUsername());
+        assertEquals(generatedCart.getItems().size() + request.getQuantity(), actualCart.getItems().size());
+        assertEquals(createItem(1), actualCart.getItems().get(0));
+        assertEquals(expectedTotal, actualCart.getTotal());
+
+        verify(cartRepository, times(1)).save(actualCart);
+
     }
 
-    public static User createUser() {
-        User user = new User();
-        user.setId(1L);
-        user.setUsername("fymo");
-        user.setPassword("password");
-        user.setCart(createCart(user));
+    @Test
+    public void removeFromCart() {
 
-        return user;
+        ModifyCartRequest request = new ModifyCartRequest();
+        request.setQuantity(1);
+        request.setItemId(1);
+        request.setUsername("userTest");
+
+        ResponseEntity<Cart> response = cartController.removeFromcart(request);
+        assertNotNull(response);
+        assertEquals(200, response.getStatusCodeValue());
+
+        Cart actualCart = response.getBody();
+
+        Cart generatedCart = createCart(createUser());
+
+        assertNotNull(actualCart);
+
+        Item itemTest = createItem(request.getItemId());
+        BigDecimal itemTestPrice = itemTest.getPrice();
+
+        BigDecimal expectedTotal = generatedCart.getTotal().subtract(itemTestPrice.multiply(BigDecimal.valueOf(request.getQuantity())));
+
+        assertEquals("userTest", actualCart.getUser().getUsername());
+        assertEquals(generatedCart.getItems().size() - request.getQuantity(), actualCart.getItems().size());
+        assertEquals(createItem(2), actualCart.getItems().get(0));
+        assertEquals(expectedTotal, actualCart.getTotal());
+
+        verify(cartRepository, times(1)).save(actualCart);
+
     }
 
-    public static Cart createCart(User user) {
-        Cart cart = new Cart();
-        cart.setId(1L);
-        List<Item> items = createItems();
-        cart.setItems(createItems());
-        cart.setTotal(items.stream().map(item -> item.getPrice()).reduce(BigDecimal::add).get());
-        cart.setUser(user);
+    @Test
+    public void userTestInvalidName() {
 
-        return cart;
+        ModifyCartRequest request = new ModifyCartRequest();
+        request.setQuantity(1);
+        request.setItemId(1);
+        request.setUsername("userTestInvalid");
+
+        ResponseEntity<Cart> removeResponse = cartController.removeFromcart(request);
+        assertNotNull(removeResponse);
+        assertEquals(404, removeResponse.getStatusCodeValue());
+        assertNull(removeResponse.getBody());
+
+        ResponseEntity<Cart> addResponse = cartController.addTocart(request);
+        assertNotNull(addResponse);
+        assertEquals(404, addResponse.getStatusCodeValue());
+        assertNull(addResponse.getBody());
+
+        verify(userRepository, times(2)).findByUsername("userTestInvalid");
+
     }
 
-    public static List<Item> createItems() {
 
-        List<Item> items = new ArrayList<>();
-
-        for (int i = 1; i <= 2; i++) {
-            items.add(createItem(i));
-        }
-
-        return items;
-    }
-
-    public static Item createItem(long id){
-        Item item = new Item();
-        item.setId(id);
-
-        item.setPrice(BigDecimal.valueOf(id * 1.2));
-
-        item.setName("Item " + item.getId());
-
-        item.setDescription("Description ");
-        return item;
-    }
-
-    public static List<UserOrder> createOrders(){
-        List<UserOrder> orders = new ArrayList<>();
-
-        IntStream.range(0,2).forEach(i -> {
-            UserOrder order = new UserOrder();
-            Cart cart = createCart(createUser());
-
-            order.setItems(cart.getItems());
-            order.setTotal(cart.getTotal());
-            order.setUser(createUser());
-            order.setId(Long.valueOf(i));
-
-            orders.add(order);
-        });
-        return orders;
-    }
 }
